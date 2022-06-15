@@ -2,7 +2,7 @@ import React from 'react';
 
 function Home(props) {
     return (
-       <div>
+        <div>
   <section id="hero" className="d-flex align-items-center">
     <div className="container">
       <h1>Welcome to City <br />Multispeciality Hospital</h1>
