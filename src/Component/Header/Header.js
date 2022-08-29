@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { themeContext } from '../../Context/ThemeContext';
+import Alert from '../Alert/Alert';
+import { signOutAction } from '../../redux/action/auth.action';
+import { useDispatch } from 'react-redux';
 
 function Header(props) {
 
@@ -8,6 +11,7 @@ function Header(props) {
 
     console.log(value);
 
+    const dispatch = useDispatch();
 
     return (
         <div className="main-header">
@@ -26,6 +30,7 @@ function Header(props) {
                     <button onClick={() => value.toggle_theme(value.theme)}>
                         Change Theme
                     </button>
+                    <Alert />
                 </div>
             </div>
             <header id="header" className={`fixed-top ${value.theme}`}>
@@ -65,6 +70,7 @@ function Header(props) {
                                  <span>Login/ Signup</span>
                     </NavLink>
                     <Link className="appointment-btn scrollto" to={"/refexample"}>Refexample</Link> 
+                    <span className="appointment-btn scrollto d-none d-md-inline" onClick={() => {dispatch(signOutAction()) }}>Logout</span>
 
                 </div>
             </header>

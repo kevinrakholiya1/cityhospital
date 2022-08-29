@@ -1,9 +1,10 @@
-import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { NavLink, useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
 
 function ListAppointment(props) { 
+
     const history = useHistory();
     let [data, setData] = useState([]);
 
@@ -12,20 +13,26 @@ function ListAppointment(props) {
 
         setData(localData);
     }
+
     useEffect(() => {
         dData();
+
     }, []);
 
-    const handledelete = (id) => {
+    const handleDelete = (id) => {
         let localData = JSON.parse(localStorage.getItem("BookAppointment"));
 
         let fData = localData.filter((l) => l.id !== id);
 
         localStorage.setItem("BookAppointment",JSON.stringify(fData));
+
+        console.log(localData);
+
         dData();
     }
 
-    const  Data = (id) => {
+    const  data_app = (id) => {
+
         history.push("/BookAppointment", {id : id});
         console.log(id);
     } 
@@ -35,7 +42,7 @@ function ListAppointment(props) {
             <section id="appointment" className="appointment">
                 <div className="container">
                     <div className="section-title">
-                        <h2>appointment</h2>
+                        <h2>Appointment</h2>
                     </div>
                     <div className='row text-center mb-4'>
                         <div className='col-6'>
@@ -56,25 +63,17 @@ function ListAppointment(props) {
                                             <CardTitle tag="h5">
                                                 {d.name}
                                             </CardTitle>
-
                                             <CardSubtitle
                                                 className="mb-2"
                                                 tag="h6"
                                             >
-
                                                 {d.email}
                                             </CardSubtitle>
                                             <CardText>
                                               {d.date}
-
-
                                             </CardText>
-                                            <Button onClick={() => Data(d.id)}>
-                                                Edit
-                                            </Button>
-                                            <Button onClick={() => handledelete(d.id)}>
-                                                Delete
-                                            </Button>
+                                            <Button onClick={() => data_app(d.id)}>Edit</Button>
+                                            <Button onClick={() => handleDelete(d.id)}>Delete</Button>
                                         </CardBody>
                                     </Card>
                                 )
